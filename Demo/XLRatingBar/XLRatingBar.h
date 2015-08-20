@@ -14,7 +14,7 @@
  */
 @property (nonatomic, assign) int maxStar;
 /**
- *  当前显示的星星,最少选择一星
+ *  当前显示的星星
  */
 @property (nonatomic, assign) int currentStar;
 /**

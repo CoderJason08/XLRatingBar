@@ -16,6 +16,8 @@
 @property (nonatomic, strong) UIImage *highlightImage;
 @property (nonatomic, strong) UIImage *normalImage;
 
+@property (nonatomic, strong) UIView *bottomView;
+
 @end
 
 @implementation XLRatingBar
@@ -73,17 +75,20 @@
     
     _enable = YES;
     
+    _bottomView = [[UIView alloc] init];
+    [self addSubview:_bottomView];
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-    [self addGestureRecognizer:tap];
+    [self.bottomView addGestureRecognizer:tap];
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
-    [self addGestureRecognizer:pan];
+    [self.bottomView addGestureRecognizer:pan];
 }
 
 - (void)layoutSubviews {
     _starWidth = (self.frame.size.width - (_maxStar + 1) * _starPadding) / _maxStar;
     _starWidth = (_starWidth > CGRectGetHeight(self.frame)) ? CGRectGetHeight(self.frame) : _starWidth;
     _topPadding = (CGRectGetHeight(self.frame) - _starWidth) / 2;
-    
+    _bottomView.frame = CGRectMake(0, _topPadding, self.frame.size.width, _starWidth);
     [self setNeedsDisplay];
     
 }
@@ -92,7 +97,7 @@
 
 - (void)tapAction:(UITapGestureRecognizer *)tap {
     if (self.isEnable) {
-        CGPoint location = [tap locationInView:self];
+        CGPoint location = [tap locationInView:self.bottomView];
         if (location.x > _starPadding) {
             _currentStar = (location.x - _starPadding) / (_starWidth + _starPadding) + 1;
             [self setNeedsDisplay];
@@ -102,7 +107,7 @@
 
 - (void)panAction:(UIPanGestureRecognizer *)pan {
     if (self.isEnable) {
-        CGPoint location = [pan locationInView:self];
+        CGPoint location = [pan locationInView:self.bottomView];
         if (location.x > _starPadding) {
             _currentStar = (location.x - _starPadding) / (_starWidth + _starPadding) + 1;
             [self setNeedsDisplay];

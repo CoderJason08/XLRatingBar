@@ -19,8 +19,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     // Do any additional setup after loading the view, typically from a nib.
-    XLRatingBar *ratingBar = [[XLRatingBar alloc] initWithFrame:CGRectMake(100, 100, 100, 50)];
-//    ratingBar.backgroundColor = [UIColor whiteColor];
+    XLRatingBar *ratingBar = [[XLRatingBar alloc] initWithFrame:CGRectMake(100, 100, 200, 50)];
     [self.view addSubview:ratingBar];
 }
 
