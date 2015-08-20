@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XLRatingBar : UIView
+@interface XLRatingBar : UIControl
 /**
  *  最大星星数量,默认5
  */

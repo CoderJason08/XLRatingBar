@@ -99,7 +99,7 @@
     if (self.isEnable) {
         CGPoint location = [tap locationInView:self.bottomView];
         if (location.x > _starPadding) {
-            _currentStar = (location.x - _starPadding) / (_starWidth + _starPadding) + 1;
+            self.currentStar = (location.x - _starPadding) / (_starWidth + _starPadding) + 1;
             [self setNeedsDisplay];
         }
     }
@@ -109,7 +109,7 @@
     if (self.isEnable) {
         CGPoint location = [pan locationInView:self.bottomView];
         if (location.x > _starPadding) {
-            _currentStar = (location.x - _starPadding) / (_starWidth + _starPadding) + 1;
+            self.currentStar = (location.x - _starPadding) / (_starWidth + _starPadding) + 1;
             [self setNeedsDisplay];
         }
     }
@@ -133,13 +133,10 @@
 
 - (void)setCurrentStar:(int)currentStar {
     _currentStar = currentStar;
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
     [self setNeedsDisplay];
 }
 
-- (void)setMaxStar:(int)maxStar {
-    _maxStar = maxStar;
-    [self setNeedsDisplay];
-}
 
 
 @end
