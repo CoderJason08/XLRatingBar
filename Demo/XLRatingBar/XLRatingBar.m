@@ -93,16 +93,20 @@
 - (void)tapAction:(UITapGestureRecognizer *)tap {
     if (self.isEnable) {
         CGPoint location = [tap locationInView:self];
-        _currentStar = location.x / _starWidth;
-        [self setNeedsDisplay];
+        if (location.x > _starPadding) {
+            _currentStar = (location.x - _starPadding) / (_starWidth + _starPadding) + 1;
+            [self setNeedsDisplay];
+        }
     }
 }
 
 - (void)panAction:(UIPanGestureRecognizer *)pan {
     if (self.isEnable) {
         CGPoint location = [pan locationInView:self];
-        _currentStar = location.x / _starWidth;
-        [self setNeedsDisplay];
+        if (location.x > _starPadding) {
+            _currentStar = (location.x - _starPadding) / (_starWidth + _starPadding) + 1;
+            [self setNeedsDisplay];
+        }
     }
 }
 
